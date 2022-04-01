@@ -11,7 +11,7 @@ class BinaryTreeNodeTest {
 
     @BeforeEach
     void setUp() {
-        testNode = new BinaryTreeNode<>(null);
+        testNode = new BinaryTreeNode<Integer>(null);
     }
 
     @Test
