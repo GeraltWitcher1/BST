@@ -7,11 +7,9 @@ import java.util.Queue;
 public class BinaryTree<E> {
 
     private BinaryTreeNode<E> root;
-    private int size;
 
     public BinaryTree(BinaryTreeNode<E> root) {
         this.root = root;
-        this.size = size();
     }
 
     public BinaryTreeNode<E> getRoot() {
@@ -23,8 +21,7 @@ public class BinaryTree<E> {
     }
 
     public int size() {
-        this.size = size(root);
-        return size;
+        return size(root);
     }
 
     private int size(BinaryTreeNode<E> node) {
@@ -60,10 +57,10 @@ public class BinaryTree<E> {
         if (isEmpty())
             return false;
 
-        return contains(root, value);
+        return containsRecursive(root, value);
     }
 
-    private boolean contains(BinaryTreeNode<E> node, E value) {
+    private boolean containsRecursive(BinaryTreeNode<E> node, E value) {
 
         if (node.getElement().equals(value)) {
             return true;
@@ -72,11 +69,11 @@ public class BinaryTree<E> {
         boolean isFound = false;
 
         if (node.getLeftChild() != null) {
-            isFound = contains(node.getLeftChild(), value);
+            isFound = containsRecursive(node.getLeftChild(), value);
         }
 
         if (!isFound && node.getRightChild() != null) {
-            isFound = contains(node.getRightChild(), value);
+            isFound = containsRecursive(node.getRightChild(), value);
         }
 
         return isFound;
@@ -86,16 +83,16 @@ public class BinaryTree<E> {
 
         ArrayList<E> inOrder = new ArrayList<>();
 
-        inOrder(root, inOrder);
+        inOrderRecursive(root, inOrder);
 
         return inOrder;
     }
 
-    private void inOrder(BinaryTreeNode<E> current, ArrayList<E> nodes) {
+    private void inOrderRecursive(BinaryTreeNode<E> current, ArrayList<E> nodes) {
         if (current != null) {
-            inOrder(current.getLeftChild(), nodes);
+            inOrderRecursive(current.getLeftChild(), nodes);
             nodes.add(current.getElement());
-            inOrder(current.getRightChild(), nodes);
+            inOrderRecursive(current.getRightChild(), nodes);
         }
     }
 
@@ -103,16 +100,16 @@ public class BinaryTree<E> {
 
         ArrayList<E> preOrder = new ArrayList<>();
 
-        preOrder(root, preOrder);
+        preOrderRecursive(root, preOrder);
 
         return preOrder;
     }
 
-    private void preOrder(BinaryTreeNode<E> current, ArrayList<E> nodes) {
+    private void preOrderRecursive(BinaryTreeNode<E> current, ArrayList<E> nodes) {
         if (current != null) {
             nodes.add(current.getElement());
-            preOrder(current.getLeftChild(), nodes);
-            preOrder(current.getRightChild(), nodes);
+            preOrderRecursive(current.getLeftChild(), nodes);
+            preOrderRecursive(current.getRightChild(), nodes);
         }
     }
 
@@ -120,15 +117,15 @@ public class BinaryTree<E> {
 
         ArrayList<E> postOrder = new ArrayList<>();
 
-        postOrder(root, postOrder);
+        postOrderRecursive(root, postOrder);
 
         return postOrder;
     }
 
-    private void postOrder(BinaryTreeNode<E> current, ArrayList<E> nodes) {
+    private void postOrderRecursive(BinaryTreeNode<E> current, ArrayList<E> nodes) {
         if (current != null) {
-            postOrder(current.getLeftChild(), nodes);
-            postOrder(current.getRightChild(), nodes);
+            postOrderRecursive(current.getLeftChild(), nodes);
+            postOrderRecursive(current.getRightChild(), nodes);
             nodes.add(current.getElement());
         }
     }
